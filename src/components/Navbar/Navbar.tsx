@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
   classNames('navbar-item', {
@@ -8,6 +8,8 @@ const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
   });
 
 export const Navbar: FC = () => {
+  const { search } = useLocation();
+
   return (
     <nav
       data-cy="nav"
@@ -17,10 +19,22 @@ export const Navbar: FC = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink to="/" className={navLinkClasses}>
+          <NavLink
+            to={{
+              pathname: '/',
+              search,
+            }}
+            className={navLinkClasses}
+          >
             Home
           </NavLink>
-          <NavLink to="/people" className={navLinkClasses}>
+          <NavLink
+            to={{
+              pathname: '/people',
+              search,
+            }}
+            className={navLinkClasses}
+          >
             People
           </NavLink>
         </div>
